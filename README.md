@@ -1,36 +1,54 @@
-# mortalsoft-api-client
-PHP API Client for Casino
+# Example Usage of MortalSoft API Class
 
-Example of usage:
+To interact with the API for operator-related actions, you can use the `APIClient` class. First, make sure you have the correct `$baseUrl` and `$token` for the API endpoint.
+
 ```php
 <?php
+require_once 'mortalsoft.class.php'; // Include the APIClient class file
 
-$apiBaseUrl = 'https://dev.mortalsoft.wtf';
-$apiToken = 'YOUR_API_TOKEN';
+// Replace 'your_base_url' and 'your_token' with the actual values
+$baseUrl = 'https://api-prod.mortalsoft.online';
+$token = 'your_token';
 
-$apiClient = new APIClient($apiBaseUrl, $apiToken);
-//OR EMPTY PARAM FOR FULL LIST
-$queryParams = [
-    'name' => 'game1|game2',
-];
-$response = $apiClient->listGames($queryParams);
-var_dump($response);
+// Create an instance of the APIClient
+$client = new MortalSoftClient($baseUrl, $token);
 
-$identifier = 'john_doe';
-$response = $apiClient->getBalance($identifier);
-var_dump($response);
+// Example 1: List Games
+$responseGames = $client->listGames();
+if ($responseGames) {
+    echo "List of Games:\n";
+    print_r($responseGames);
+} else {
+    echo "Failed to fetch games list.\n";
+}
 
-$identifier = 'john_doe';
-$amount = 100;
-$response = $apiClient->changeBalance($identifier, $amount);
-var_dump($response);
+// Example 2: Get Balance
+$identifier = 'user123'; // Replace 'user123' with the actual user identifier
+$responseBalance = $client->getBalance($identifier);
+if ($responseBalance) {
+    echo "User Balance:\n";
+    print_r($responseBalance);
+} else {
+    echo "Failed to fetch user balance.\n";
+}
 
-$identifier = 'john_doe';
-$response = $apiClient->createSession($identifier);
-var_dump($response);
+// Example 3: Change Balance
+$identifier = 'user123'; // Replace 'user123' with the actual user identifier
+$amount = 50.00; // Replace 50.00 with the desired amount
+$responseChangeBalance = $client->changeBalance($identifier, $amount);
+if ($responseChangeBalance) {
+    echo "Balance changed successfully.\n";
+} else {
+    echo "Failed to change user balance.\n";
+}
 
-$identifier = 'john_doe';
-$response = $apiClient->closeSession($identifier);
-var_dump($response);
+// Example 4: Create Session
+$identifier = 'user123'; // Replace 'user123' with the actual user identifier
+$responseCreateSession = $client->createSession($identifier);
+if ($responseCreateSession) {
+    echo "User session created. JWT Token: {$responseCreateSession['token']}\n";
+} else {
+    echo "Failed to create user session.\n";
+}
 
-```
+?>
