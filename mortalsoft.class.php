@@ -20,50 +20,71 @@ class APIClient
         $this->token = $token;
     }
 
+    /**
+     * List Games
+     *
+     * @param array $queryParams Query parameters to filter the list of games.
+     * @return array|false Returns an array of games or false on failure.
+     */
     public function listGames($queryParams = [])
     {
-        $url = $this->baseUrl . '/api?action=listGames';
+        $url = $this->baseUrl . '/api/' . $this->token . '/listGames';
         $queryString = http_build_query($queryParams);
+
         if (!empty($queryString)) {
-            $url .= '&' . $queryString;
+            $url .= '?' . $queryString;
         }
+
         return $this->sendRequest($url);
     }
 
+    /**
+     * Get Balance
+     *
+     * @param string $identifier The unique identifier of the user.
+     * @return array|false Returns the user's balance or false on failure.
+     */
     public function getBalance($identifier)
     {
-        $url = $this->baseUrl . '/api?action=getBalance';
+        $url = $this->baseUrl . '/api/' . $this->token . '/getBalance';
         $data = [
             'identifier' => $identifier
         ];
+
         return $this->sendRequest($url, $data);
     }
 
+    /**
+     * Change Balance
+     *
+     * @param string $identifier The unique identifier of the user.
+     * @param float $amount The new balance amount.
+     * @return array|false Returns the response status or false on failure.
+     */
     public function changeBalance($identifier, $amount)
     {
-        $url = $this->baseUrl . '/api?action=changeBalance';
+        $url = $this->baseUrl . '/api/' . $this->token . '/changeBalance';
         $data = [
             'identifier' => $identifier,
             'amount' => $amount
         ];
+
         return $this->sendRequest($url, $data);
     }
 
+    /**
+     * Create Session
+     *
+     * @param string $identifier The unique identifier of the user.
+     * @return array|false Returns the JWT token for the user's session or false on failure.
+     */
     public function createSession($identifier)
     {
-        $url = $this->baseUrl . '/api?action=createSession';
+        $url = $this->baseUrl . '/api/' . $this->token . '/createSession';
         $data = [
             'identifier' => $identifier
         ];
-        return $this->sendRequest($url, $data);
-    }
 
-    public function closeSession($identifier)
-    {
-        $url = $this->baseUrl . '/api?action=closeSession';
-        $data = [
-            'identifier' => $identifier
-        ];
         return $this->sendRequest($url, $data);
     }
 
