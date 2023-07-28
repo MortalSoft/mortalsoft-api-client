@@ -35,17 +35,12 @@ The API supports the following actions, each corresponding to a specific operato
 
 **Action:** `listGames`
 
-**Description:** This action allows you to list games associated with a specific shop.
+**Description:** This action allows you to list games.
 
 #### Request Parameters
 
-- `id` (optional) - Filter games by ID.
-- `name` (optional) - Filter games by name. You can provide multiple names separated by `|`.
 - `search` (optional) - Filter games by title using a search term.
-- `view` (optional) - Filter games by a specific view.
-- `labels` (optional) - Filter games by labels. You can provide multiple labels separated by `|`.
 - `category` (optional) - Filter games by category. You can provide multiple categories separated by `|`.
-- `subcat` (optional) - Filter games by subcategories, such as "new" or "hot".
 
 #### Response
 
