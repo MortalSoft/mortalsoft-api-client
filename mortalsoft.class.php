@@ -9,7 +9,7 @@
       \/                        \/          \/                   
 **********************************************************************/
 
-class APIClient
+class MortalSoftClient
 {
     private $baseUrl;
     private $token;
