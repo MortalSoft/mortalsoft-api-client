@@ -1,12 +1,11 @@
 # Example Usage of MortalSoft API Class
 
-To interact with the API for operator-related actions, you can use the `APIClient` class. First, make sure you have the correct `$baseUrl` and `$token` for the API endpoint.
+To interact with the API for operator-related actions, you can use the `MortalSoftClient` class. First, make sure you have the correct `$baseUrl` and `$token` for the API endpoint.
 
 ```php
 <?php
-require_once 'mortalsoft.class.php'; // Include the APIClient class file
+require_once 'mortalsoft.class.php'; // Include the MortalSoftClient class file
 
-// Replace 'your_base_url' and 'your_token' with the actual values
 $baseUrl = 'https://api-prod.mortalsoft.online';
 $token = 'your_token';
 
